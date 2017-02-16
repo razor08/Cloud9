@@ -1,0 +1,9 @@
+<% include partials/header %>
+<h1>Welcome to stuff.ejs: <%= theName %></h1>
+
+<% if(theName=="rusty") {%>
+<p>Good choice picking up Rusty!</p> 
+<% } else { %>
+<p>You made a bad choice by not picking up Rusty!</p>
+<% } %>
+<% include partials/footer %>

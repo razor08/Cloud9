@@ -1,0 +1,7 @@
+<% include partials/header %>
+<h1>Welcome to looper.ejs</h1>
+
+<% for(var i=0; i<thePost.length; i++) {%>
+<li><%= thePost[i].sname %>, <%= thePost[i].name %></li>
+<% } %>
+<% include partials/footer %>
