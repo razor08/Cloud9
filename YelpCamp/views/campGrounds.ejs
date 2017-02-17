@@ -1,0 +1,10 @@
+<h1>Welcome to the Camp Grounds Home Page!</h1>
+
+<% CGList.forEach(function(cgs){ %>
+    <li><%= cgs.name %></li>
+<% }) %>
+<form action="/campGrounds/new" method="POST">
+    <input type="text" name="cgx" placeholder="Enter the name" ></input>
+    <input type="text" name="cimg" placeholder="Enter the image url" ></input>
+    <input type="submit"></input>
+</form>
