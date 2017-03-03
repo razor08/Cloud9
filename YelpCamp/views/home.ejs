@@ -1,9 +1,25 @@
 <% include partials/header %>
 <div class="container">
-    <h1 class="jumbotron">
-    Welcome, to YelpCamp!<br>
-    <a class="btn btn-primary btn-large" href="/campGrounds/new">Add a new Camp Ground</a>
-    </h1>
+    <header class="jumbotron">
+    <div class="container">
+        <h1>Welcome, to YelpCamp!</h1>
+        <p>Pick our featured camp grounds from all over the world!</p>
+        <p><a class="btn btn-primary btn-large" href="/campGrounds">Add a new Camp Ground</a></p>
+    </div>
+    </header>
+    
+    <div class="row" style="display:flex; flex-wrap:wrap;">
+        <% CGList.forEach(function(cgs){ %>
+        <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                <img src="<%= cgs.img %>">
+                <div class="caption">
+                    <h4><%= cgs.name %></h4>
+                </div>
+                </div>
+        </div>
+        <% }) %>
+    </div>
 </div>
 
 

@@ -1,0 +1,21 @@
+{
+  "name": "passport_app",
+  "version": "1.0.0",
+  "description": "Passport Model App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Razor08",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.0",
+    "express-session": "^1.15.1",
+    "mongoose": "^4.8.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0"
+  }
+}
