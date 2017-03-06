@@ -1,0 +1,31 @@
+{
+  "name": "yelpcamp_v2",
+  "version": "1.0.0",
+  "description": "\"YelpCamp with Auth and Comments\"",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.0",
+    "express-sanitizer": "^1.0.2",
+    "method-override": "^2.3.7",
+    "mongodb": "^2.2.24",
+    "mongoose": "^4.8.5",
+    "request": "^2.79.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razor08/Cloud9.git"
+  },
+  "author": "razor08",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/razor08/Cloud9/issues"
+  },
+  "homepage": "https://github.com/razor08/Cloud9#readme"
+}
