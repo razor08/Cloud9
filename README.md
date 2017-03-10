@@ -6,9 +6,6 @@
      `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
     ----------------------------------------------------------------- 
 
-
-Welcome to your Node.js project on Cloud9 IDE!
-
 This chat example showcases how to use `socket.io` with a static `express` server.
 
 ## Running the server
@@ -19,4 +16,10 @@ This chat example showcases how to use `socket.io` with a static `express` serve
 
     $ node server.js
 
-Once the server is running, open the project in the shape of 'https://projectname-username.c9users.io/'. As you enter your name, watch the Users list (on the left) update. Once you press Enter or Send, the message is shared with all connected clients.
+The main project in this workspace is YelpCamp which is a Campground info website based on the groundbreaking idea of the famous website Yelp.com 
+
+Rest of the directories are practice apps on node.js distinct functions.
+
+For authentication, I have used Passport.js
+
+All the relevant packages can be found in each directory's package.json
