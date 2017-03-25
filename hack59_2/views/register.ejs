@@ -1,0 +1,16 @@
+<% include ./partials/header %>
+<h1>Sign Up</h1>
+
+<form action="/register" method="POST">
+    <input type="text" placeholder="Username" name="username"></input>
+    <input type="password" placeholder="Password" name="password"></input>
+    <select name="type">
+      <option value="physician">Physician</option>
+      <option value="surgeon">Surgeon</option>
+      <option value="cardiologist">Cardiologist</option>
+      <option value="orthopaedic">Orthopaedic</option>
+      <option value="allergist">Allergist</option>
+    </select>
+    <input type="submit"></input>
+</form>
+<% include ./partials/footer %>
