@@ -51,7 +51,7 @@ router.post("/register", function(req, res){
             if (user.enable === false) {
                 passport.authenticate("local")(req, res, function(){
                 req.flash("success", "Get your ID enabled by the admin first and Welcome, " + user.username + "!");
-                res.redirect("/");
+                res.render("temp",{currentUser: req.user});
             });
             } else {
             passport.authenticate("local")(req, res, function(){
