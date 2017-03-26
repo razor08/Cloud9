@@ -1,13 +1,47 @@
-// Dependencies
-var express = require('express'),
-    OpenTok = require('opentok');
-
+var methodOverride = require("method-override");
+var express =  require("express");
+var app = express();
+var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/helloopentok");
+var passport = require("passport");
+var LocalStrategy = require("passport-local");
+var User = require("./models/user");
+var indexRoutes = require("./routes/index");
+var flash = require("connect-flash");
 
-var sessionSchema = mongoose.Schema({
-   sessionID: String 
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + "/public"));
+app.set("view engine", "ejs");
+mongoose.connect("mongodb://localhost/hack59_2");
+app.use(flash());
+app.use(methodOverride("_method"));
+//Passport COnfiguration
+app.use(require("express-session")({
+    secret: "I am the best in the world!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   res.locals.error = req.flash("error");
+   res.locals.success = req.flash("success");
+   next();
 });
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(indexRoutes);
+
+app.get("/", function(req, res){
+   res.render("landing",{currentUser: req.user});
+});
+
+
+var OpenTok = require('opentok');
 
 // Verify that the API Key and API Secret are defined
 var apiKey = 45805602,
@@ -18,7 +52,6 @@ if (!apiKey || !apiSecret) {
 }
 
 // Initialize the express app
-var app = express();
 app.use(express.static(__dirname + '/public'));
 
 // Initialize OpenTok
@@ -27,13 +60,42 @@ var opentok = new OpenTok(apiKey, apiSecret);
 // Create a session and store it in the express app
 opentok.createSession(function(err, session) {
   if (err) throw err;
-  app.set('sessionId', session.sessionId);
+  app.set('sessionId1', session.sessionId);
   // We will wait on starting the app until this is done
-  init();
+  
 });
 
-app.get('/', function(req, res) {
-  var sessionId = app.get('sessionId'),
+opentok.createSession(function(err, session) {
+  if (err) throw err;
+  app.set('sessionId2', session.sessionId);
+  // We will wait on starting the app until this is done
+  
+});
+
+opentok.createSession(function(err, session) {
+  if (err) throw err;
+  app.set('sessionId3', session.sessionId);
+  // We will wait on starting the app until this is done
+  
+});
+
+opentok.createSession(function(err, session) {
+  if (err) throw err;
+  app.set('sessionId4', session.sessionId);
+  // We will wait on starting the app until this is done
+  
+});
+
+opentok.createSession(function(err, session) {
+  if (err) throw err;
+  app.set('sessionId5', session.sessionId);
+  // We will wait on starting the app until this is done
+  
+});
+
+
+app.get('/physician', function(req, res) {
+  var sessionId = app.get('sessionId1'),
       // generate a fresh token for this client
       token = opentok.generateToken(sessionId);
 
@@ -44,9 +106,58 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/surgeon', function(req, res) {
+  var sessionId = app.get('sessionId2'),
+      // generate a fresh token for this client
+      token = opentok.generateToken(sessionId);
+
+  res.render('index.ejs', {
+    apiKey: apiKey,
+    sessionId: sessionId,
+    token: token
+  });
+});
+
+app.get('/cardiologist', function(req, res) {
+  var sessionId = app.get('sessionId3'),
+      // generate a fresh token for this client
+      token = opentok.generateToken(sessionId);
+
+  res.render('index.ejs', {
+    apiKey: apiKey,
+    sessionId: sessionId,
+    token: token
+  });
+});
+
+app.get('/orthopaedic', function(req, res) {
+  var sessionId = app.get('sessionId4'),
+      // generate a fresh token for this client
+      token = opentok.generateToken(sessionId);
+
+  res.render('index.ejs', {
+    apiKey: apiKey,
+    sessionId: sessionId,
+    token: token
+  });
+});
 // Start the express app
-function init() {
-  app.listen(process.env.PORT, process.env.IP, function(req, res) {
+
+app.get('/allergist', function(req, res) {
+  var sessionId = app.get('sessionId5'),
+      // generate a fresh token for this client
+      token = opentok.generateToken(sessionId);
+
+  res.render('index.ejs', {
+    apiKey: apiKey,
+    sessionId: sessionId,
+    token: token
+  });
+});
+
+app.get("/*", function(req, res){
+    res.send("Sorry, page not found...What are you doing with your life ?");    
+});
+  app.listen(process.env.PORT, process.env.IP, function(){
     console.log('You\'re app is now ready');
   });
-}

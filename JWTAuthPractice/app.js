@@ -28,7 +28,8 @@ function middle(req, res, next) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });    
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;    
+        req.decoded = decoded;
+        console.log(req.decoded._doc.admin);
         next();
       }
     });
@@ -89,19 +90,23 @@ app.get("/users", middle, function(req, res){
       if (err) {
           res.json({success: false, message: "Some error with database occured!"});
       } else {
+          if (req.decoded._doc.admin=== false)
+          { res.json({success: false, message: "You don't have admin rights!"}) }
+          else {
           res.json(usersList);
+          }
       }
    });
 });
 
 app.get("/setup", function(req, res){
-   var jay = User({
-       username: 'Jay',
+   var shashank = User({
+       username: 'Shashank',
        password: 'password',
-       admin: true
+       admin: false
    });
    
-   User.create(jay, function(err, newUser){
+   User.create((shashank), function(err, newUser){
       if(err)
       {
           res.send("There was some error!");

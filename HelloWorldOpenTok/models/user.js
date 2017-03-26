@@ -6,8 +6,7 @@ var userSchema = mongoose.Schema({
     username: String, 
     password: String,
     enable: Boolean,
-    type: String,
-    regid: String
+    type: String
 });
 userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("User", userSchema);

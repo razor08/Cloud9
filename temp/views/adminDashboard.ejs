@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<% include ./partials/header %>
+
+<h1>Welcome to Hack59 Admin Dashboard!</h1>
+
+<% allUsers.forEach(function(user){ %>
+<li><%= user.username %> - <%= user.type %> - 
+<% if (user.enable === false) { %>
+<a href="<%= user._id %>/enable">Enable User</a> - 
+<% } else { %>
+<a href="<%= user._id %>/disable">Disable User</a> - 
+<% } %>
+<a href="/<%= user._id %>/changeToAdmin">Change to Admin</a>
+<form style="display:inline;" class="delete-form" action="/<%= user._id %>/delete?_method=DELETE" method="POST">
+    <input  type="submit" class="btn btn-xs btn-danger" value="Delete User"></input>
+</form>
+</li>
+<% }) %>
+<% include ./partials/footer %>
