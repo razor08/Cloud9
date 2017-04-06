@@ -11,6 +11,7 @@ var User = require("./models/user");
 var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
+var Strategy = require('passport-google-oauth20').Strategy;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -27,11 +28,36 @@ app.use(function(req, res, next){
    res.locals.currentUser = req.user;
    next();
 });
+app.use(require('cookie-parser')());
+passport.use(new Strategy({
+    clientID: "808193311207-smn3331banbv65q8qr0fjfnf4rchk62d.apps.googleusercontent.com",
+    clientSecret: "DWahasqOk-_DboftuHYO7_ei",
+    callbackURL: 'http://practice-nodejs-razor08.c9users.io/login/google/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    // In this example, the user's Facebook profile is supplied as the user
+    // record.  In a production-quality application, the Facebook profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+  }));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+//passport.serializeUser(User.serializeUser());
+//passport.deserializeUser(User.deserializeUser());
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
 
 app.use(commentRoutes);
 app.use("/campgrounds", campgroundRoutes);

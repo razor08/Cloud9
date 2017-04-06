@@ -31,6 +31,22 @@ router.post("/login",passport.authenticate("local",
     
 });
 
+
+router.get('/login/google',
+  passport.authenticate('google', {scope: 'https://www.googleapis.com/auth/plus.login'}));
+
+router.get('/login/google/return', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+router.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('profile', { user: req.user });
+  });
+
 router.get("/logout", function(req, res){
    req.logout();
    res.redirect("/campgrounds");

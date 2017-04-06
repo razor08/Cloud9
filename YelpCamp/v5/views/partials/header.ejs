@@ -19,7 +19,7 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     <% }  else { %>
-                        <li><a>Welcome, <%= currentUser.username %></a></li>
+                        <li><a>Welcome, <%= currentUser.displayName %></a></li>
                         <li><a href="/logout">Sign Out</a></li>
                     <% } %>
                     </ul>
