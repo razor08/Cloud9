@@ -41,6 +41,17 @@ router.get('/login/google/return',
     res.redirect('/');
   });
 
+
+router.get('/login/facebook',
+  passport.authenticate('facebook'));
+
+router.get('/login/facebook/return', 
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){

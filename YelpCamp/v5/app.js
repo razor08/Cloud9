@@ -12,6 +12,7 @@ var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 var Strategy = require('passport-google-oauth20').Strategy;
+var Strategy1 = require('passport-facebook').Strategy;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -43,6 +44,19 @@ passport.use(new Strategy({
     return cb(null, profile);
   }));
 
+passport.use(new Strategy1({
+    clientID: "678926268982556",
+    clientSecret: "adc15a2d2505237959416c62f6308b47",
+    callbackURL: 'http://practice-nodejs-razor08.c9users.io/login/facebook/return'
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    // In this example, the user's Facebook profile is supplied as the user
+    // record.  In a production-quality application, the Facebook profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+  }));
 
 app.use(passport.initialize());
 app.use(passport.session());
