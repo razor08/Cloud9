@@ -51,6 +51,15 @@ router.get('/login/facebook/return',
     res.redirect('/');
   });
 
+router.get('/login/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/login/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 router.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),

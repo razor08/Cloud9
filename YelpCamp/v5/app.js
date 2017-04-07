@@ -13,6 +13,7 @@ var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
 var Strategy = require('passport-google-oauth20').Strategy;
 var Strategy1 = require('passport-facebook').Strategy;
+var GitHubStrategy = require('passport-github2').Strategy;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -57,6 +58,16 @@ passport.use(new Strategy1({
     // providers.
     return cb(null, profile);
   }));
+
+passport.use(new GitHubStrategy({
+    clientID: "3bf09bcd0126d1fe3f57",
+    clientSecret: "73585694f00aa54b27a40f0dec48f5ad11ee01d1",
+    callbackURL: "http://practice-nodejs-razor08.c9users.io/login/github/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+     return done(null, profile);
+  }
+));
 
 app.use(passport.initialize());
 app.use(passport.session());

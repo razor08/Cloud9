@@ -2,12 +2,25 @@
 <h1>Login</h1>
 
 <form action="/login" method="POST">
-    <input type="text" placholder = "Enter username" name="username"></input>
+    <input type="text" placeholder="Enter username" name="username"></input>
     <input type="password" placeholder="Enter password" name="password"></input>
     <input type="submit" value="Login"></input>
 </form>
 
-<a href="/login/google">Log In with Google</a>
-<a href="/login/facebook">Log In with Facebook</a>
+<a href="/login/google"><button class="ui google plus button">
+  <i class="google plus icon"></i>
+  Google+
+</button></a>
+
+<a href="/login/facebook"><button style="display:inline;" class="ui facebook button">
+  <i class="facebook icon"></i>
+  Facebook
+</button></a>
+
+<a href="/login/github"><button style="display:inline;" class="ui github button">
+  <i class="github icon"></i>
+  Github
+</button></a>
+
 
 <% include ./partials/footer %>
