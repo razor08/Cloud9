@@ -1,0 +1,16 @@
+<% include ./partials/header %>
+
+<div class="container">
+    <div class="row">
+        <h2 style="text-align: center;">Add a new comment to <%= cgs.name %></h2>
+        <div style="width:30%; margin:25px auto;">
+        <form action="/campGrounds/<%= cgs._id %>/comments" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" type="text" name="comment[text]" placeholder="Enter comment"></textarea>
+            </div>
+            <input class="btn btn-lg btn-primary btn-block" type="submit"></input>
+        </form>
+        </div>
+    </div>
+
+<% include ./partials/footer %>

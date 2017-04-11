@@ -1,0 +1,59 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <% if(allCGS && allCGS.length >0 ) { %>
+                <% for (i=0; i<allCGS.length;i++) { %>
+                <% if (String(allCGS[i]._id) === String(cgs._id)) { %>
+                <li class="list-group-item active"><a style="color:#000;" href="/campgrounds/<%= allCGS[i]._id %>"><%= allCGS[i].name %></a></li>
+                <% } else { %>
+                <li class="list-group-item "><a href="/campgrounds/<%= allCGS[i]._id %>"><%= allCGS[i].name %></a></li>
+                <% } %>
+                <% } %>
+                <% } %>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= cgs.image %>"></img>
+                <div class="caption-full">
+                    <h4 class="pull-right">$<%= cgs.price %> a night</h4>
+                    <h4 ><a><%= cgs.name %></a></h4>
+                    <p><%= cgs.description%></p>
+                    <p><em>Submitted by </em><b><%= cgs.author.username %></b></p>
+                    <% if(currentUser && String(currentUser._id) === String(cgs.author.id) ) {%>
+                    <form style="display: inline;" action="/campgrounds/<%= cgs._id %>?_method=DELETE" method="POST">
+                        <button style="margin-bottom: 5px;" class="negative ui small button">Delete this Post</button>
+                    </form>
+                    <a href="/campgrounds/<%= cgs._id %>/edit"><button style="margin-bottom: 5px;" class="ui inverted teal small button">Edit this Post</button></a>
+                    <% } %>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a href="/campgrounds/<%= cgs._id %>/comments/new"><button class="ui inverted green button">Add a new Comment!</button></a>
+                </div>
+                <hr>
+                <% cgs.comments.forEach(function(comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>
+                        <span class="pull-right"><b><%= comment.created.toDateString() %></b></span>
+                        <p><%= comment.text %></p>
+                        <% if (currentUser && String(currentUser._id)===String(comment.author.id)) { %>
+                        <a class="btn btn-xs btn-warning" href="/campgrounds/<%= cgs._id %>/comments/<%= comment._id %>/edit">Edit Comment</a>
+                        <form class="delete-form" action="/campgrounds/<%= cgs._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-xs btn-danger" value="Delete Comment"></input>
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>
