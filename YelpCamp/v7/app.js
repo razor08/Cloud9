@@ -20,7 +20,7 @@ var GitHubStrategy = require('passport-github2').Strategy;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-mongoose.connect("mongodb://localhost/yelpcamp_v6");
+mongoose.connect("mongodb://razor08:hailhydra<3@ds159050.mlab.com:59050/telpcamp_v7");
 app.use(flash());
 app.use(methodOverride("_method"));
 //Passport COnfiguration
@@ -39,7 +39,7 @@ app.use(require('cookie-parser')());
 passport.use(new Strategy({
     clientID: "808193311207-1fbgsiipc4qgofnb54dj9ccjt2dd9b5b.apps.googleusercontent.com",
     clientSecret: "9qrB0mBuYn6ZmoHAdfchNeGa",
-    callbackURL: 'http://practice-nodejs-razor08.c9users.io/login/google/return'
+    callbackURL: 'https://glacial-thicket-65228.herokuapp.com/login/google/return'
   },
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -53,7 +53,7 @@ passport.use(new Strategy({
 passport.use(new Strategy1({
     clientID: "678926268982556",
     clientSecret: "adc15a2d2505237959416c62f6308b47",
-    callbackURL: 'http://practice-nodejs-razor08.c9users.io/login/facebook/return'
+    callbackURL: 'https://glacial-thicket-65228.herokuapp.com/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -67,7 +67,7 @@ passport.use(new Strategy1({
 passport.use(new GitHubStrategy({
     clientID: "3bf09bcd0126d1fe3f57",
     clientSecret: "73585694f00aa54b27a40f0dec48f5ad11ee01d1",
-    callbackURL: "http://practice-nodejs-razor08.c9users.io/login/github/callback"
+    callbackURL: "https://glacial-thicket-65228.herokuapp.com/login/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
      return done(null, profile);
