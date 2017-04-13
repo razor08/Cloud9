@@ -13,7 +13,7 @@ var flash = require("connect-flash");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
-mongoose.connect("mongodb://localhost/hack59_2");
+mongoose.connect("mongodb://razor08:hailhydra<3@ds161210.mlab.com:61210/getdoc");
 app.use(flash());
 app.use(methodOverride("_method"));
 //Passport COnfiguration

@@ -34,7 +34,7 @@ router.get("/dashboard", function(req, res){
     } else {
         if (req.user.enable === false) {
             req.flash("error", "Please get your account approved first!");
-            res.render("landing",{currentUser: req.user});
+            res.redirect("/logout");
                } else {
    res.render("dashboard",{currentUser: req.user}); 
     }
