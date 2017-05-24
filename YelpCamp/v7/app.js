@@ -24,18 +24,25 @@ mongoose.connect("mongodb://razor08:hailhydra<3@ds159050.mlab.com:59050/telpcamp
 app.use(flash());
 app.use(methodOverride("_method"));
 //Passport COnfiguration
+
+
 app.use(require("express-session")({
     secret: "I am the best in the world!",
     resave: false,
     saveUninitialized: false
 }));
+
+
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
    res.locals.error = req.flash("error");
    res.locals.success = req.flash("success");
    next();
 });
+
 app.use(require('cookie-parser')());
+
+
 passport.use(new Strategy({
     clientID: "808193311207-1fbgsiipc4qgofnb54dj9ccjt2dd9b5b.apps.googleusercontent.com",
     clientSecret: "9qrB0mBuYn6ZmoHAdfchNeGa",
